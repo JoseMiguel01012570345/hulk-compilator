@@ -1,0 +1,54 @@
+{
+    "Description":"\t\t\tAqui se define el lenguaje que se interpretara",
+    "Keyword Information":"\t\t\tPalabras reservadas de nuestro lenguaje separadas por su significado a priori.Cada lista representa un conjunto de palabras reservadas agrupadas segun su funcionalidad basica",
+    "Simbol Information":"\t\t\tSimbolos de nuestro lenguaje.Cada lista contiene a los simbolos agrupados por su funcionalidad basica",
+    "Operator Information":"\t\t\tOperadores de nuestro lenguaje.Cada lista contione los operadores segun su tipo",
+    "Types Information":"\t\t\tTipos nativos de nuestro lenguaje",
+    "keywords":[
+        "number",
+        "string",
+        "boolean"     
+    ],
+    "keyword_functions":[
+
+    ],
+    "keyword_declarators":[
+
+    ],
+    "keyword_conditionals":[
+
+    ],
+    "keyword_loops":[
+
+    ],
+    "keyword_consts":[
+
+    ],
+    "simbols":[
+        
+    ],
+    "simbol_accesors":[
+
+    ],
+    "simbol_agrupators":[
+
+    ],
+    "simbol_separators":[
+
+    ],
+    "simbol_declarators":[
+
+    ],
+    "operators":[
+
+    ],
+    "operators_unary":[
+
+    ],
+    "operators_ternary":[
+
+    ],
+    "types":[
+
+    ]
+}
