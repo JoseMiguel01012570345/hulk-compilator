@@ -5,11 +5,13 @@
 
 
 ## Function caLL:
-
+ 
 * `P '` -> L '' ( E ' , $|$ P ' E ' ,
+* `P '` -> L '' ( L ''' , $|$ P ' L ''' ,
 * `P '` -> L '' ( F  $|$ P ' F ,
 * `P '` -> L '' ( C  $|$ P ' C  ,
 * `P ''` -> P ' )
+* `P ''` -> P '' 
 * `P ''` -> ( P '' )
 * `P` -> P '' ;
 
@@ -51,10 +53,12 @@ By default every non-token element is taken to `L ''` if it is a word like
 
 * `D '` -> ( D ' )
 * `D '` -> let E0
-* `E '` -> L '' := E '
-* `E0` -> L '' = E '
+* `E '` -> L '' := E ' $|$ L ''' := E ' $|$ L ''' := E '
+* `E0` -> L '' = E ' $|$ L ''' = E '
 * `D` -> D '; 
 * `L '` -> ( L '' ) 
+* `L '''` -> L '' : L '' // let x: Number = 42;
+* `E '` -> L ''
 
 ## Booleans
 
@@ -120,10 +124,10 @@ By default every non-token element is taken to `N '` if it is a number like
 
 ## function
 
-* F -> function P '' bl
-* F -> function P '' => E
-* F -> function P '' => bl
-
+* F -> function P '' bl $|$ function P '' : L '' bl
+* F -> function P '' => E $|$ function P '' : L '' => E
+* F -> function P '' => bl $|$ $|$ function P '' : L '' => bl // case : function tan(x: Number): Number => sin(x) / cos(x);
+  
 ## Types
 
 * `C`-> type L '' bl '
@@ -133,4 +137,6 @@ By default every non-token element is taken to `N '` if it is a number like
 * `C`-> type L '' inherits P '' bl '
 * `C`-> type P '' inherits P '' bl '
 * `E '` -> new P ''
+
+
 
