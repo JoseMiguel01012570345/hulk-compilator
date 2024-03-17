@@ -4,16 +4,11 @@
     P is an in-Line caLL , P '' is expression part caLL and P ' is an about to build function call , that derives in P or P '' , L ' is literal , S ' is string , N ' is number , B ' is boolean , V ' is vector
 
 
-## Functions caLL s:
+## Function caLL:
 
-* `P '` -> L ' ( L ' , $|$ P ' L ' ,
-* `P '` -> L ' ( N ' , $|$ P ' N ' ,
-* `P '` -> L ' ( B ' , $|$ P ' B ' ,
-* `P '` -> L ' ( P '' , $|$ P ' P '' ,
-* `P '` -> L ' ( V  ' $|$ P ' V ' ,
-* `P '` -> L ' ( F $|$ P ' F ,
-* `P '` -> L ' ( C ' $|$ P ' C ' ,
-* `P '` -> L ' ( S ' $|$ P ' S ' ,
+* `P '` -> L '' ( E ' , $|$ P ' E ' ,
+* `P '` -> L '' ( F  $|$ P ' F ,
+* `P '` -> L '' ( C  $|$ P ' C  ,
 * `P ''` -> P ' )
 * `P ''` -> ( P '' )
 * `P` -> P '' ;
@@ -22,35 +17,33 @@
 
 By default every non-token element is taken to `S '` if it is a word like inside quotation marks , `""`
 
-* `S '` -> L '' @ L '' $|$ L ' @ L ' 
-* `S '` -> L '' @@ L '' $|$ L ' @@ L ' 
+* `G` -> L '' $|$ L ' $|$ N ' $|$ P ''
+
+* `S '` -> G @ G 
+* `S '` -> G @@ G 
 * `S '` -> S ' @ S '
 * `S '` -> S ' @@ S ' 
-* `S '` -> N ' @ S ' 
-* `S '` -> N ' @@ N ' 
-* `S '` -> L '' @ S ' $|$ L ' @ S '
-* `S '` -> L '' @@ S ' $|$ L ' @@ S '
-* `S '` -> S ' @@ L '' $|$ S ' @@ L '
-* `S '` -> L '' @ N '  $|$ L ' @ N '
-* `S '` -> N ' @ L ''  $|$ N ' @ L '
-* `S '` -> L '' @@ N '  $|$ L ' @@ N '
-* `S '` -> N ' @@ L '' $|$ N ' @@ L '
-* `S '` -> P '' @ N '  
-* `S '` -> N ' @ P ''  
-* `S '` -> P '' @@ N ' 
-* `S '` -> N ' @@ P '' 
-* `S '` -> P '' @ S '  
-* `S '` -> S ' @ P ''  
-* `S '` -> P '' @@ S ' 
-* `S '` -> S ' @@ P '' 
+* `S '` -> G @ S ' $|$ S ' @ G
 * `S '` -> ( S ' )
 * `S` -> S ' ;
 
+## Expression block
 
-## Expression
+* `E '` -> S ' $|$ N ' $|$ P '' $|$ B ' $|$ L ' $|$ L '' $|$ V $|$ D '
+  
+* `bl '` -> { }
+  
+* `bl ''` -> { E $|$ { bl ' $|$ { bl $|$ {F $|$ {C 
+  
+* `bl ''` -> bl '' E $|$ bl '' bl $|$ bl '' F $|$ bl '' C  
+  
+* `bl '` -> bl '' }
 
-* E -> E ' ;
+* `bl` -> bl ';
 
+* E ' -> ( E ' )
+  
+* E  -> E ;
 
 ## Literals:
 
@@ -58,90 +51,86 @@ By default every non-token element is taken to `L ''` if it is a word like
 
 * `D '` -> ( D ' )
 * `D '` -> let E0
-* `E1` -> L '' := E '
+* `E '` -> L '' := E '
 * `E0` -> L '' = E '
-* `D` -> D ';
+* `D` -> D '; 
 * `L '` -> ( L '' ) 
 
 ## Booleans
 
-K -> B ' $|$ L '' $|$ P ''
-
-* `B '` -> B ' & B ' $|$ B ' & L '' $|$ B ' & L ' $|$ L '' & B ' $|$ L ' & B ' $|$ L '' & L '' $|$ L ' & L ' $|$ L '' & P '' $|$ L ' & P '' $|$ P '' & L '' $|$ P '' & L ' $|$ P '' & B ' $|$ B ' & P '' $|$ P '' & P ''
-
-* `B '` -> B ' or B ' $|$ B ' or L '' $|$ B ' or L ' $|$ L '' or B ' $|$ L ' or B ' $|$ L '' or L '' $|$ L ' or L ' $|$ L '' or P '' $|$ L ' or P '' $|$ P '' or L '' $|$ P '' or L ' $|$ P '' or B ' $|$ B ' or P '' $|$ P '' or P ''
-
+* `K` -> B ' $|$ L '' $|$ P '' $|$ L '
+* `G` -> L '' $|$ L ' $|$ N ' $|$ P ''
+* `B '` -> K & K
+* `B '` -> K or K
 * `B '` -> E ' != E ' 
-
-* `B '` ->  N ' > N ' $|$ N ' < N ' $|$ N ' >= N ' $|$ N ' <= N ' $|$ N ' > N ' $|$ N ' < N ' $|$ N ' >= N ' $|$ N ' <= P '' $|$ P '' <= N ' $|$ P '' >= N ' $|$ N ' >= P '' $|$ N ' > P '' $|$ P '' > N ' $|$ N ' < P '' $|$ P '' < N ' $|$ N ' <= L '' $|$ N ' <= L ' $|$ L '' <= N ' $|$ L ' <= N ' $|$ L '' >= N ' $|$ L ' >= N ' $|$ N ' >= L '' $|$ N ' >= L ' $|$ N ' > L '' $|$ N ' > L ' $|$ L '' > N ' $|$ L ' > N ' $|$ N ' < L '' $|$ N ' < L ' $|$ L '' < N ' $|$ L ' < N '
-
+* `B '` ->  G > G $|$ G < G
+* `B '` ->  G >= G $|$ G <= G
 *  `B '` -> E ' == E ' 
-
 * `B '` -> ( B ' )
-
-* E ' -> B '
+* `B` -> B ' ; 
 
 ## Numbers:
 
 By default every non-token element is taken to `N '` if it is a number like
 
-* `N '` -> N ' + N ' $|$  P '' + N ' $|$  N ' + P '' $|$  L '' + N ' $|$  L ' + N ' $|$  N ' + L '' $|$  N ' + L ' $|$  P '' + L '' $|$  P '' + L '' $|$  L '' + P '' $|$  L ' + P '' $|$  L '' + L '' $|$  L ' + L ' $|$  P '' + P ''
-
-* `N '` -> N ' - N ' $|$  P '' - N ' $|$  N ' - P '' $|$  L '' - N ' $|$  L ' - N ' $|$  N ' - L '' $|$  N ' - L ' $|$  P '' - L '' $|$  P '' - L ' $|$  L '' - P '' $|$  L ' - P '' $|$  L '' - L '' $|$  L ' - L ' $|$  P '' - P ''
-
-* `N '` -> N ' * N ' $|$  P '' * N ' $|$  N ' * P '' $|$  L '' * N ' $|$  L ' * N ' $|$  N ' * L '' $|$  N ' * L ' $|$  P '' * L '' $|$  P '' * L ' $|$  L '' * P '' $|$  L ' * P '' $|$  L '' * L '' $|$  L ' * L ' $|$  P '' * P ''
-
-* `N '` -> N ' / N ' $|$  P '' / N ' $|$  N ' / P '' $|$  L '' / N ' $|$  L ' / N ' $|$  N ' / L '' $|$  N ' / L ' $|$  P '' / L '' $|$  P '' / L ' $|$  L '' / P '' $|$  L ' / P '' $|$  L '' / L '' $|$  L ' / L ' $|$  P '' / P ''
-
-* `N '` -> N ' ^ N ' $|$  P '' ^ N ' $|$  N ' ^ P '' $|$  L '' ^ N ' $|$  L ' ^ N ' $|$  N ' ^ L '' $|$  N ' ^ L ' $|$  P '' ^ L '' $|$  P '' ^ L ' $|$  L '' ^ P '' $|$  L ' ^ P '' $|$  L '' ^ L '' $|$  L ' ^ L ' $|$  P '' ^ P ''
-
-* `N '` -> N ' % N ' $|$  P '' % N ' $|$  N ' % P '' $|$  L '' % N ' $|$  L ' % N ' $|$  N ' % L '' $|$  N ' % L ' $|$  P '' % L '' $|$  P '' % L ' $|$  L '' % P '' $|$  L ' % P '' $|$  L '' % L '' $|$  L ' % L '  $|$  P '' % P ''
-
-* `N '` -> N ' --  $|$ P '' -- $|$ L '' -- $|$ L ' --
-
-* `N '` -> N ' ++ $|$ P '' ++ $|$ L '' ++ $|$ $|$ L ' ++
-
+* `G` -> L '' $|$ L ' $|$ N ' $|$ P ''
+* `N '` -> G + G
+* `N '` -> G - G
+* `N '` -> G * G
+* `N '` -> G / G
+* `N '` -> G ^ G
+* `N '` -> G % G
+* `N '` -> G --
+* `N '` -> G ++
 * `N '` -> PI
-
 * `N '` -> e 
-
+* `N` -> L ' -= G '
+* `N` -> L ' += G '
+* `N` -> L ' /= G '
+* `N` -> L ' *= G '
 * `N '` -> ( N ' )
-
 * `N` -> N ' ; 
+   
+## in
 
-* `N` -> L ' -= N '
-
-* `N` -> L ' -= P ''
-
-* `N` -> L ' -= L '
-
-* `N` -> L ' += N '
-
-* `N` -> L ' += P ''
-
-* `N` -> L ' += L '
-
-* `N` -> L ' /= N '
-
-* `N` -> L ' /= P ''
-
-* `N` -> L ' /= L '
-
-* `N` -> L ' *= N '
-
-* `N` -> L ' *= P ''
-
-* `N` -> L ' *= L '
-
-E ' -> N '
-
-
-# in
-
-E -> D in E
+* `E '` -> D ' in E ' $|$ D in bl ' 
+* `E` -> D ' in bl $|$ D ' in E
 
 ## for
 
-E -> for( L '' in E )
+* E ' -> for( L '' in E ' ) bl '
+* E -> for( L '' in E ' ) bl
+* E -> for( L '' in E ' ) E
 
 ##  Conditional
+
+* `K` -> B ' $|$ L '' $|$ P '' $|$ L '
+* `I` -> if ( K ) E
+* `I` -> if ( K ) bl
+* `If` -> I else bl $|$ I else E
+* `I` -> I elif ( K ) bl $|$ I  elif ( K ) E
+* `E` -> If
+
+## while
+
+* `K` -> B ' $|$ L '' $|$ P '' $|$ L '
+* `W`-> while( K ) E
+* `W`-> while( K ) bl
+* `W '` -> while( K ) bl '
+
+## function
+
+* F -> function P '' bl
+* F -> function P '' => E
+* F -> function P '' => bl
+
+## Types
+
+* `C`-> type L '' bl '
+* `C`-> type P '' bl ' 
+* `C`-> type L '' inherits L '' bl '
+* `C`-> type P '' inherits L '' bl '
+* `C`-> type L '' inherits P '' bl '
+* `C`-> type P '' inherits P '' bl '
+* `E '` -> new P ''
+
