@@ -1,7 +1,7 @@
 
 `NOTES:`
 
-    P is an in-Line caLL , P '' is expression part caLL and P ' is an about to build function call , that derives in P or P '' , L ' is literal , S ' is string , N ' is number , B ' is boolean , V ' is vector
+    P is an in-Line caLL , P '' is expression part caLL and P ' is an about to build function call , that derives in P or P '' , L ' is variable in brackets ( L '' ) where L '' is the variable , S ' is string , N ' is number , B ' is boolean , V ' is vector
 
 
 ## Function caLL:
