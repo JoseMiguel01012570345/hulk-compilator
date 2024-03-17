@@ -31,21 +31,14 @@ By default every non-token element is taken to `S '` if it is a word like inside
 
 ## Expression block
 
-* `E '` -> S ' $|$ N ' $|$ P '' $|$ B ' $|$ L ' $|$ L '' $|$ V $|$ D '
-  
+* `E '` -> S ' $|$ N ' $|$ P '' $|$ B ' $|$ L ' $|$ L '' $|$ V ' $|$ D ' $|$ X '
 * `bl '` -> { }
-  
-* `bl ''` -> { E $|$ { bl ' $|$ { bl $|$ {F $|$ {C 
-  
-* `bl ''` -> bl '' E $|$ bl '' bl $|$ bl '' F $|$ bl '' C  
-  
+* `bl ''` -> { E $|$ { bl ' $|$ { bl $|$ {F $|$ {C   
+* `bl ''` -> bl '' E $|$ bl '' bl $|$ bl '' F $|$ bl '' C    
 * `bl '` -> bl '' }
-
 * `bl` -> bl ';
-
-* E ' -> ( E ' )
-  
-* E  -> E ;
+* `E '` -> ( E ' )
+* `E`  -> E ;
 
 ## Literals:
 
@@ -62,22 +55,23 @@ By default every non-token element is taken to `L ''` if it is a word like
 
 ## Booleans
 
-* `K` -> B ' $|$ L '' $|$ P '' $|$ L '
-* `G` -> L '' $|$ L ' $|$ N ' $|$ P ''
+* `K` -> B ' $|$ L '' $|$ P '' $|$ L ' $|$ X '
+* `G` -> L '' $|$ L ' $|$ N ' $|$ P '' $|$ X '
 * `B '` -> K & K
 * `B '` -> K or K
 * `B '` -> E ' != E ' 
 * `B '` ->  G > G $|$ G < G
 * `B '` ->  G >= G $|$ G <= G
-*  `B '` -> E ' == E ' 
+* `B '` -> E ' == E ' 
+* `B '` ->  E ' is E '
 * `B '` -> ( B ' )
 * `B` -> B ' ; 
 
 ## Numbers:
 
-By default every non-token element is taken to `N '` if it is a number like
+By default every non-token element is taken to `N '` if it is a number like.
 
-* `G` -> L '' $|$ L ' $|$ N ' $|$ P ''
+* `G` -> L '' $|$ L ' $|$ N ' $|$ P '' $|$ X '
 * `N '` -> G + G
 * `N '` -> G - G
 * `N '` -> G * G
@@ -102,13 +96,13 @@ By default every non-token element is taken to `N '` if it is a number like
 
 ## for
 
-* E ' -> for( L '' in E ' ) bl '
-* E -> for( L '' in E ' ) bl
-* E -> for( L '' in E ' ) E
+* `E '` -> for( L '' in E ' ) bl '
+* `E` -> for( L '' in E ' ) bl
+* `E` -> for( L '' in E ' ) E
 
 ##  Conditional
 
-* `K` -> B ' $|$ L '' $|$ P '' $|$ L '
+* `K` -> B ' $|$ L '' $|$ P '' $|$ L ' $|$ X '
 * `I` -> if ( K ) E
 * `I` -> if ( K ) bl
 * `If` -> I else bl $|$ I else E
@@ -117,16 +111,16 @@ By default every non-token element is taken to `N '` if it is a number like
 
 ## while
 
-* `K` -> B ' $|$ L '' $|$ P '' $|$ L '
+* `K` -> B ' $|$ L '' $|$ P '' $|$ L ' $|$ X '
 * `W`-> while( K ) E
 * `W`-> while( K ) bl
 * `W '` -> while( K ) bl '
 
 ## function
 
-* F -> function P '' bl $|$ function P '' : L '' bl
-* F -> function P '' => E $|$ function P '' : L '' => E
-* F -> function P '' => bl $|$ $|$ function P '' : L '' => bl // case : function tan(x: Number): Number => sin(x) / cos(x);
+* `F` -> function P '' bl $|$ function P '' : L '' bl
+* `F` -> function P '' => E $|$ function P '' : L '' => E
+* `F` -> function P '' => bl $|$ $|$ function P '' : L '' => bl  // case : function tan(x: Number): Number => sin(x) / cos(x);
   
 ## Types
 
@@ -138,5 +132,18 @@ By default every non-token element is taken to `N '` if it is a number like
 * `C`-> type P '' inherits P '' bl '
 * `E '` -> new P ''
 
+## Special block
 
+* `bls '` -> { P '' : L ''; $|$ bls ' P '' : L '';
+* `bls ` -> bl 's }
 
+## Protocols
+
+* `Q` -> protocol L '' bls $|$ protocol L '' extends L '' bls
+
+## Vector
+
+* `V '` -> [ E ' || E ' ]
+* `V ''` -> [ E ' , $|$ V '' E ' ,
+* `V '` -> V '' ]
+* X '-> L ''[ E ']
