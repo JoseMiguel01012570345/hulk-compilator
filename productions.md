@@ -5,20 +5,17 @@
 
 ## Function caLL:
  
-* `P '` -> Z '' ( E ' , $|$ P ' E ' ,
-* `P '` -> Z '' ( L ''' , $|$ P ' L ''' ,
-* `P '` -> Z '' ( F  $|$ P ' F ,
-* `P '` -> Z '' ( C  $|$ P ' C  ,
-* `P ''` -> P ' )
-* `P ''` -> P '' 
+* `P '` -> Z '' ( E ' , $|$ P ' E ' , 
+* `P '` -> Z '' ( L ''' , $|$ P ' L ''' , 
+* `P '` -> Z '' ( F  $|$ P ' F , 
+* `P ''` -> P ' ) $|$ Z ''( E ') $|$ Z ''( F ) $|$ $|$ Z ''( L ''') $|$ P ' E ' )  $|$ P ' L ''' )  $|$ P ' F ' )
 * `P ''` -> ( P '' )
-* `P` -> P '' ;
-  
+
 ## Strings
 
 By default every non-token element is taken to `S '` if it is a word like inside quotation marks , `""`
 
-* `G1 '` -> L '' $|$ L ' $|$ N ' $|$ P '' $|$ S ' $|$ T '
+* `G1 '` -> L '' $|$ N ' $|$ P '' $|$ S ' $|$ T '
 * `S '` -> G1 ' @ G1 ' 
 * `S '` -> G1 ' @@ G1 ' 
 * `S '` -> ( S ' )
@@ -26,7 +23,7 @@ By default every non-token element is taken to `S '` if it is a word like inside
 
 ## Expression block
 
-* `E '` -> S ' $|$ N ' $|$ P '' $|$ B ' $|$ L ' $|$ L '' $|$ V ' $|$ D ' $|$ X ' $|$ T ' $|$ K $|$ G ' $|$ G1 '
+* `E '` -> S ' $|$ N ' $|$ P '' $|$ B ' $|$ L '' $|$ V ' $|$ D ' $|$ X ' $|$ T ' $|$ K $|$ G ' $|$ G1 ' $|$ W '
 * `bl '` -> { }
 * `bl ''` -> { E $|$ { bl ' $|$ { bl $|$ {F $|$ {C   
 * `bl ''` -> bl '' E $|$ bl '' bl $|$ bl '' F $|$ bl '' C    
@@ -34,8 +31,8 @@ By default every non-token element is taken to `S '` if it is a word like inside
 * `bl` -> bl ';
 * `E '` -> ( E ' )
 * `E`  -> E ';
-* `T '` -> E '.P '
-* `T '` -> E '.L ''
+* `T '` -> E '.P '' $|$ S '.P '' $|$ N '.P '' $|$ P ''.P '' $|$ B '.P '' $|$ L ''.P '' $|$ V '.P '' $|$ D '.P '' $|$ X '.P '' $|$ T '.P '' $|$ K.P '' $|$ G '.P '' $|$ G1 '.P '' $|$ W '.P ''
+* `T '` ->  E '.L '' $|$ S '.L '' $|$ N '.L '' $|$ L ''.L '' $|$ B '.L '' $|$ L ''.L '' $|$ V '.L '' $|$ D '.L '' $|$ X '.L '' $|$ T '.L '' $|$ K.L '' $|$ G '.L '' $|$ G1 '.L '' $|$ W '.L ''
 
 ## Literals:
 
@@ -43,22 +40,22 @@ By default every non-token element is taken to `L ''` if it is a word like
 
 * `D '` -> ( D ' )
 * `D '` -> let E0
-* `D ''` -> D ' , E0
-* `D ''` -> D '' , E0
+* `D ''` -> D ' , E0 $|$ D ' , D '
+* `D ''` -> D '' , E0 $|$ D '' , E0
 * `D` -> D '' ;
-* `E '` -> L '' := E ' $|$ L ''' := E ' $|$ L ''' := E '
+* `E '` -> L '' := E ' $|$ L ''' := E ' $|$ D ' := E '
 * `E0` -> L '' = E ' $|$ L ''' = E '
 * `D` -> D '; 
-* `L '` -> ( L '' ) 
 * `L '''` -> L '' : L '' // let x: Number = 42;
+* `L ''` -> (L '')
 * `E '` -> L ''
 
 ## Booleans
 
-* `K` -> L '' $|$ P '' $|$ L ' $|$ X ' $|$ T '
-* `G '` -> L '' $|$ L ' $|$ N ' $|$ P '' $|$ X ' $|$ T '
+* `K` -> L '' $|$ P '' $|$ X ' $|$ T '
+* `G '` -> L '' $|$ N ' $|$ P '' $|$ X ' $|$ T '
 * `B '` -> K & K $|$ K $ B ' $|$ B ' $ K
-* `B '` -> K || K
+* `B '` -> K | K $|$ K | B ' $|$ B ' | K
 * `B '` -> E ' != E ' 
 * `B '` ->  G ' > G ' $|$ G ' < G '
 * `B '` ->  G ' >= G ' $|$ G ' <= G '
@@ -71,7 +68,7 @@ By default every non-token element is taken to `L ''` if it is a word like
 
 By default every non-token element is taken to `N '` if it is a number like.
 
-* `G '` -> L '' $|$ L ' $|$ N ' $|$ P '' $|$ X ' $|$ T '
+* `G '` -> L '' $|$ N ' $|$ P '' $|$ X ' $|$ T '
 * `G '` -> PI
 * `G '` -> e 
 
@@ -84,13 +81,14 @@ By default every non-token element is taken to `N '` if it is a number like.
 * `G '` -> G ' ^  G '
 * `G '` -> G ' %  G '
 * `G '` -> ( G ' )
+
 ### No operator , but numbers
 
 * `N '` -> G '
-* `N '` -> L ' -= G '
-* `N '` -> L ' += G '
-* `N '` -> L ' /= G '
-* `N '` -> L ' *= G '
+* `N '` -> L '' -= G '
+* `N '` -> L '' += G '
+* `N '` -> L '' /= G '
+* `N '` -> L '' *= G '
 * `N '` -> G ' --
 * `N '` -> G ' ++
 * `N '` -> G '
@@ -98,38 +96,47 @@ By default every non-token element is taken to `N '` if it is a number like.
 
 ## in
 
-* `E '` -> D ' in E ' $|$ D ' in bl ' 
-* `E '` -> D '' in E ' $|$ D '' in bl ' 
-* `E` -> D ' in bl $|$ D ' in E
-* `E` -> D '' in bl $|$ D '' in E
+* `E '` -> E ' in E ' $|$ D '' in E ' $|$ D ' in E '
+* `E` -> D '' in bl ' $|$ D ' in bl ' 
+* `E` -> E ' in bl $|$ D ' in E $|$ E ' in bl '
+* `E` ->  E ' in E $|$ D '' in E 
 
 ## for
 
-* `for '` -> for( L '' in E ' ) bl '
+* `for` -> for( L '' in E ' ) bl '
+* `for '` -> for( L '' in E ' ) E '
 * `for` -> for( L '' in E ' ) bl
 * `for` -> for( L '' in E ' ) E
+* `E` -> for
+* `E '` -> for '
 
 ##  Conditional
 
-* `K` -> B ' $|$ L '' $|$ P '' $|$ L ' $|$ X ' $|$ T '
-* `I` -> if ( K ) E
-* `I` -> if ( K ) bl
-* `If` -> I else bl $|$ I else E
-* `I` -> I elif ( K ) bl $|$ I  elif ( K ) E
+* `K` -> L '' $|$ P '' $|$ X ' $|$ T '
+* `I` -> if ( K ) E ' $|$ if ( B ' ) E '
+* `I` -> if ( K ) bl '
+* `If` -> I else bl $|$ I else E $|$ if ( B ' ) E $|$ if ( K ) E 
+* `I` -> I elif ( K ) bl $|$ I  elif ( K ) E ' $|$ I elif ( B ' ) bl $|$ I  elif ( B ' ) E '
+* `E '` -> I else E '
 * `E` -> If
 
 ## while
 
-* `K` -> B ' $|$ L '' $|$ P '' $|$ L ' $|$ X ' $|$ T '
-* `W`-> while( K ) E
-* `W`-> while( K ) bl
-* `W '` -> while( K ) bl '
-
+* `K` -> L '' $|$ P '' $|$ X ' $|$ T '
+* `W`-> while( K ) E $|$ while( B ' ) E
+* `W`-> while( K ) bl $|$ while( B ' ) bl
+* `W` -> while( K ) bl ' $|$ while( B ' ) bl '
+* `W '` -> while( K ) E ' $|$ while( B ' ) E '
+* `E` -> W
+  
 ## function
 
 * `F` -> function P '' bl $|$ function P '' : L '' bl
 * `F` -> function P '' => E $|$ function P '' : L '' => E
-* `F` -> function P '' => bl $|$ $|$ function P '' : L '' => bl  // case : function tan(x: Number): Number => sin(x) / cos(x);
+* `F` -> function P '' => bl $|$ $|$ function P '' : L '' => bl  
+* `F` -> function P '' bl ' $|$ function P '' : L '' bl '
+* `F` -> function P '' => E $|$ function P '' : L '' => E
+* `F` -> function P '' => bl ' $|$ $|$ function P '' : L '' => bl ' 
   
 ## Types
 
@@ -152,7 +159,7 @@ By default every non-token element is taken to `N '` if it is a number like.
 
 ## Vector
 
-* `V '` -> [ E ' || L '' in E ' ]
+* `V '` -> [ E ' || E ' in E ' ]
 * `V ''` -> [ E ' , $|$ V '' E ' ,
 * `V '` -> V '' ]
 * `X '`-> L ''[ E ']
@@ -178,5 +185,24 @@ By default every non-token element is taken to `N '` if it is a number like.
     Shift: -+
     Reduce: -+
 
-n + n * * n * n ^ n ^ n - n * n ^ n
 
+# Reduction Strategy
+
+- Para saber que reduccion hacer en caso de que se tengas varias posibles, miramos los operadores a ambas partes ( izquierda y derecha ) , y nos quedamos con la produccion del operador con mas procedencia
+
+    ej : let x := y + 4;
+
+    let L '' := L '' + N ';
+
+    para el segundo L '' nos quedamos con G ' y resolvemos
+
+    let L '' := G ' + G ';
+
+- Una vez resuelto el ultimo pivote, se pasa para el pivote anterior y se intenta parsear desde la posicion del nuevo pivote hasta el final de la cadena
+
+### Produccion segun operador
+
+G ' <= ([ P '' , N ' , L '' , X ' , T ' ] , [ '+' , '-' , '*' , '/' , '^' , '%'  , '++' , '--' , '/=' , ' *= ' , '-=' ] )
+G1 ' <= ([L '', N ' , P '' , S ' , T '], [ '@' , '@@' ])
+K <= ([L '' , P '' , X ' , T '],[ '&' , '|' , '()' ])
+E ' <= ([L '' , P '' , X ' , T '],( '.' , ','))
