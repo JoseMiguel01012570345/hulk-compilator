@@ -19,13 +19,8 @@
 
 By default every non-token element is taken to `S '` if it is a word like inside quotation marks , `""`
 
-* `G` -> L '' $|$ L ' $|$ N ' $|$ P ''
-
-* `S '` -> G @ G 
-* `S '` -> G @@ G 
-* `S '` -> S ' @ S '
-* `S '` -> S ' @@ S ' 
-* `S '` -> G @ S ' $|$ S ' @ G
+* `S '` -> E ' @ E ' 
+* `S '` -> E ' @@ E ' 
 * `S '` -> ( S ' )
 * `S` -> S ' ;
 
@@ -58,7 +53,7 @@ By default every non-token element is taken to `L ''` if it is a word like
 * `K` -> B ' $|$ L '' $|$ P '' $|$ L ' $|$ X '
 * `G` -> L '' $|$ L ' $|$ N ' $|$ P '' $|$ X '
 * `B '` -> K & K
-* `B '` -> K or K
+* `B '` -> K || K
 * `B '` -> E ' != E ' 
 * `B '` ->  G > G $|$ G < G
 * `B '` ->  G >= G $|$ G <= G
@@ -71,27 +66,34 @@ By default every non-token element is taken to `L ''` if it is a word like
 
 By default every non-token element is taken to `N '` if it is a number like.
 
-* `G` -> L '' $|$ L ' $|$ N ' $|$ P '' $|$ X '
-* `N '` -> G + G
-* `N '` -> G - G
-* `N '` -> G * G
-* `N '` -> G / G
-* `N '` -> G ^ G
-* `N '` -> G % G
-* `N '` -> G --
-* `N '` -> G ++
-* `N '` -> PI
-* `N '` -> e 
-* `N` -> L ' -= G '
-* `N` -> L ' += G '
-* `N` -> L ' /= G '
-* `N` -> L ' *= G '
-* `N '` -> ( N ' )
-* `N` -> N ' ; 
-   
+* `G '` -> L '' $|$ L ' $|$ N ' $|$ P '' $|$ X '
+* `G '` -> PI
+* `G '` -> e 
+
+### Operators
+
+* `G '` -> G ' +  G '
+* `G '` -> G ' -  G '
+* `G '` -> G ' *  G '
+* `G '` -> G ' /  G '
+* `G '` -> G ' ^  G '
+* `G '` -> G ' %  G '
+* `G '` -> ( G ' )
+
+### No operator , but numbers
+
+* `N '` -> L ' -= G '
+* `N '` -> L ' += G '
+* `N '` -> L ' /= G '
+* `N '` -> L ' *= G '
+* `N '` -> G ' --
+* `N '` -> G ' ++
+* `N '` -> G '
+* `N` -> G ' ; 
+
 ## in
 
-* `E '` -> D ' in E ' $|$ D in bl ' 
+* `E '` -> D ' in E ' $|$ D ' in bl ' 
 * `E` -> D ' in bl $|$ D ' in E
 
 ## for
@@ -143,7 +145,35 @@ By default every non-token element is taken to `N '` if it is a number like.
 
 ## Vector
 
-* `V '` -> [ E ' || E ' ]
+* `V '` -> [ E ' || L '' in E ' ]
 * `V ''` -> [ E ' , $|$ V '' E ' ,
 * `V '` -> V '' ]
 * X '-> L ''[ E ']
+
+# Procedencia
+
+ * Arithmetic Operations
+ * Comparison Operations
+ * Logical Operations
+ * Assignment Operations
+ * Control Flow Operations
+ * If-else statements
+ * Loops (for, while, do-while)
+ * Switch-case statements (in some languages)
+ * Function Calls
+ * Array and List Operations
+ * String Operations
+ * Object and Class Operations
+ * Accessing properties (object.property)
+ * Method calls (object.method())
+ * Type Conversion
+
+
+# Strategy
+
+    Shift: ++ , --
+    Shift: -+
+    Reduce: -+
+
+n + n * * n * n ^ n ^ n - n * n ^ n
+

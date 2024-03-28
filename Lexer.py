@@ -112,7 +112,7 @@ class Lexer(IRegEx):
                 self._state = State.FINAL
                 self._match = True
                 pass
-        
+            
             pass
         
         if not forward or fault:
@@ -161,8 +161,7 @@ class Lexer(IRegEx):
             
             pass
             
-            yield EndToken('')
-        
+        yield EndToken('')
         pass
     
     def LexicalAnalisys(self,tokens,filter):

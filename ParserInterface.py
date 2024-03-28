@@ -8,3 +8,19 @@ class IExpressionParser:
         raise NotImplementedError()
     
     pass
+
+class IShiftReduceParser(IExpressionParser):
+    
+    def Shift(self):
+        """
+        se desplaza en la cadena
+        """
+        raise NotImplementedError()
+    
+    def Reduce(self):
+        """
+        reduce el token actual
+        """
+        raise NotImplementedError()
+    
+    pass

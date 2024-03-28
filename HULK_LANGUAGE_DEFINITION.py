@@ -108,7 +108,7 @@ KEYWORD_VALUES = [
     'sin',
     'tan',
     'log',
-    'E',
+    'e',
     'PI',
     'exp',
     'sqrt',
@@ -176,7 +176,7 @@ KEYWORD_LOOPS = [
 
 KEYWORD_CONSTS = [
     'PI',
-    'E'    
+    'e'    
 ]
 
 OPERATOR_VALUES = [
@@ -340,5 +340,65 @@ TYPES_DEFINED = [
     'boolean',
     'string'
 ]
+
+SYMBOLS_and_OPERATORS=[
+    
+    'object',
+    'number',
+    'boolean',
+    'string',
+    'new',
+    'print',
+    'function',
+    'let',
+    'in',
+    'protocol',
+    'type',
+    'while',
+    'for',
+    'if',
+    'else',
+    'elif',
+    'e',
+    'PI',
+    'inherits',
+    ',',
+    '\n',
+    ';',
+    '=>',
+    ':',
+    '(',
+    ')',
+    '{',
+    '}',
+    '.',
+    'self',
+    '!',
+    '++',
+    '--',
+    'is',
+    'as',
+    '+',
+    '-',
+    '*',
+    '/',
+    '^',
+    '%',
+    '<',
+    '>',
+    '<=',
+    '>=',
+    '=',
+    '==',
+    '@',
+    ':=',
+    '!',
+    '?',
+    '&',
+    '|',
+    '~',
+]
+
+
 
 LoadDefinition()

@@ -6,6 +6,10 @@ from Rules import LiteralBooleanRule,LiteralNumericRule,LiteralStringRule,NameVa
 from ExpressionDefinitions import NumberExpression,StringExpression,BooleanExpression
 from VariableDefinitions import NumberVariable,StringVariable,BooleanVariable
 from LiteralDefinitions import NumberLiteral,StringLiteral,BooleanLiteral
+import GRAMATIC_DEFINITION
+
+from os import system
+
 
 def FiltToken(token):
     return len(token.Text) > 0
@@ -34,29 +38,39 @@ recognizers = {
 # instanciamos el lexer con las reglas definidas
 lexer = Lexer(recognizers)
 
+system("cls")
+
 # cargamos el codigo
 reader = open('TestCode.hk','r')
 code = reader.read()
 lexer.LoadCode(code)
 
+#print(lexer.Code)
+
 # extraemos los tokens del codigo
-for state in lexer.LexicalAnalisys(lexer.Tokenize(),FiltToken):
-    print(state)
-    pass
+# for state in lexer.LexicalAnalisys(lexer.Tokenize(),FiltToken):
+#     print(state)
+#     pass
+
+my_list= [token.Text  for token in lexer.Tokenize() if token.Text != ' ' and token.Text != '\n' and token.Text != ''  ]
+
+gd_token= GRAMATIC_DEFINITION.traslator(my_list)
+
+print(gd_token)
 
 
-print('++++++++++++++++++++++ Computando +++++++++++++++++++++++')
-# Ejemplos de como usar las expresiones
-# Numericas
-a = NumberLiteral(10)
-b = NumberLiteral(5)
+# print('++++++++++++++++++++++ Computando +++++++++++++++++++++++')
+# # Ejemplos de como usar las expresiones
+# # Numericas
+# a = NumberLiteral(10)
+# b = NumberLiteral(5)
 
-c = NumberVariable('Suma',(a - b).Value)
+# c = NumberVariable('Suma',(a - b).Value)
 
-exp = NumberExpression([c ** b,a / c],[OperatorToken('^')])
-print(exp.Value)
+# exp = NumberExpression([c ** b,a / c],[OperatorToken('^')])
+# print(exp.Value)
 
-exp = a + b * (c ** b) - c + b/a
-print(exp.Value)
+# exp = a + b * (c ** b) - c + b/a
+# print(exp.Value)
 
 # Mismos ejemplos para los demas tipos

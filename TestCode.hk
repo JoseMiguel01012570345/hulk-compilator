@@ -1,5 +1,5 @@
-let a: number = 10 as Hola in print(Hola);
+let a: number = 10.5 as Hola in print(Hola);
 for (let i = 0; i < 100; i++){
-    if a_b is 100 "hello";
+    if a_b is 100e+300 "hello";
     else (ala & true);
 }
