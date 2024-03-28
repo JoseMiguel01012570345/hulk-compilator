@@ -54,6 +54,7 @@ lexer.LoadCode(code)
 
 my_list= [token.Text  for token in lexer.Tokenize() if token.Text != ' ' and token.Text != '\n' and token.Text != ''  ]
 
+print(my_list)
 gd_token= GRAMATIC_DEFINITION.traslator(my_list)
 
 print(gd_token)

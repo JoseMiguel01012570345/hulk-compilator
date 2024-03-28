@@ -61,6 +61,7 @@ FOR = {
 
 def traslator(token_list):
     
+    print(token_list)
     parse_list=[]
     index=0
     while index < len(token_list ):
@@ -89,7 +90,7 @@ def traslator(token_list):
                 index1 +=1
                     
         kw = False                    
-        for arg in HK.SYMBOLS_and_OPERATORS:            
+        for arg in HK.SYMBOLS_and_OPERATORS_parser:            
             
             if token_list[index] == arg:
                 
@@ -104,5 +105,6 @@ def traslator(token_list):
             else:
                 parse_list.append("L ''")
         index += 1
-            
+    
+    parse_list.append("$")
     return parse_list

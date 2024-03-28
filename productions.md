@@ -13,12 +13,12 @@
 * `P ''` -> P '' 
 * `P ''` -> ( P '' )
 * `P` -> P '' ;
-
+  
 ## Strings
 
 By default every non-token element is taken to `S '` if it is a word like inside quotation marks , `""`
 
-* `G1 '` -> L '' $|$ L ' $|$ N ' $|$ P '' $|$ S '
+* `G1 '` -> L '' $|$ L ' $|$ N ' $|$ P '' $|$ S ' $|$ T '
 * `S '` -> G1 ' @ G1 ' 
 * `S '` -> G1 ' @@ G1 ' 
 * `S '` -> ( S ' )
@@ -26,14 +26,16 @@ By default every non-token element is taken to `S '` if it is a word like inside
 
 ## Expression block
 
-* `E '` -> S ' $|$ N ' $|$ P '' $|$ B ' $|$ L ' $|$ L '' $|$ V ' $|$ D ' $|$ X '
+* `E '` -> S ' $|$ N ' $|$ P '' $|$ B ' $|$ L ' $|$ L '' $|$ V ' $|$ D ' $|$ X ' $|$ T ' $|$ K $|$ G ' $|$ G1 '
 * `bl '` -> { }
 * `bl ''` -> { E $|$ { bl ' $|$ { bl $|$ {F $|$ {C   
 * `bl ''` -> bl '' E $|$ bl '' bl $|$ bl '' F $|$ bl '' C    
 * `bl '` -> bl '' }
 * `bl` -> bl ';
 * `E '` -> ( E ' )
-* `E`  -> E ;
+* `E`  -> E ';
+* `T '` -> E '.P '
+* `T '` -> E '.L ''
 
 ## Literals:
 
@@ -41,6 +43,9 @@ By default every non-token element is taken to `L ''` if it is a word like
 
 * `D '` -> ( D ' )
 * `D '` -> let E0
+* `D ''` -> D ' , E0
+* `D ''` -> D '' , E0
+* `D` -> D '' ;
 * `E '` -> L '' := E ' $|$ L ''' := E ' $|$ L ''' := E '
 * `E0` -> L '' = E ' $|$ L ''' = E '
 * `D` -> D '; 
@@ -50,9 +55,9 @@ By default every non-token element is taken to `L ''` if it is a word like
 
 ## Booleans
 
-* `K` -> B ' $|$ L '' $|$ P '' $|$ L ' $|$ X '
-* `G '` -> L '' $|$ L ' $|$ N ' $|$ P '' $|$ X '
-* `B '` -> K & K
+* `K` -> L '' $|$ P '' $|$ L ' $|$ X ' $|$ T '
+* `G '` -> L '' $|$ L ' $|$ N ' $|$ P '' $|$ X ' $|$ T '
+* `B '` -> K & K $|$ K $ B ' $|$ B ' $ K
 * `B '` -> K || K
 * `B '` -> E ' != E ' 
 * `B '` ->  G ' > G ' $|$ G ' < G '
@@ -66,7 +71,7 @@ By default every non-token element is taken to `L ''` if it is a word like
 
 By default every non-token element is taken to `N '` if it is a number like.
 
-* `G '` -> L '' $|$ L ' $|$ N ' $|$ P '' $|$ X '
+* `G '` -> L '' $|$ L ' $|$ N ' $|$ P '' $|$ X ' $|$ T '
 * `G '` -> PI
 * `G '` -> e 
 
@@ -94,17 +99,19 @@ By default every non-token element is taken to `N '` if it is a number like.
 ## in
 
 * `E '` -> D ' in E ' $|$ D ' in bl ' 
+* `E '` -> D '' in E ' $|$ D '' in bl ' 
 * `E` -> D ' in bl $|$ D ' in E
+* `E` -> D '' in bl $|$ D '' in E
 
 ## for
 
-* `E '` -> for( L '' in E ' ) bl '
-* `E` -> for( L '' in E ' ) bl
-* `E` -> for( L '' in E ' ) E
+* `for '` -> for( L '' in E ' ) bl '
+* `for` -> for( L '' in E ' ) bl
+* `for` -> for( L '' in E ' ) E
 
 ##  Conditional
 
-* `K` -> B ' $|$ L '' $|$ P '' $|$ L ' $|$ X '
+* `K` -> B ' $|$ L '' $|$ P '' $|$ L ' $|$ X ' $|$ T '
 * `I` -> if ( K ) E
 * `I` -> if ( K ) bl
 * `If` -> I else bl $|$ I else E
@@ -113,7 +120,7 @@ By default every non-token element is taken to `N '` if it is a number like.
 
 ## while
 
-* `K` -> B ' $|$ L '' $|$ P '' $|$ L ' $|$ X '
+* `K` -> B ' $|$ L '' $|$ P '' $|$ L ' $|$ X ' $|$ T '
 * `W`-> while( K ) E
 * `W`-> while( K ) bl
 * `W '` -> while( K ) bl '
@@ -148,7 +155,7 @@ By default every non-token element is taken to `N '` if it is a number like.
 * `V '` -> [ E ' || L '' in E ' ]
 * `V ''` -> [ E ' , $|$ V '' E ' ,
 * `V '` -> V '' ]
-* X '-> L ''[ E ']
+* `X '`-> L ''[ E ']
 
 # Procedencia
 
@@ -157,15 +164,11 @@ By default every non-token element is taken to `N '` if it is a number like.
  * Logical Operations
  * Assignment Operations
  * Control Flow Operations
- * If-else statements
- * Loops (for, while, do-while)
- * Switch-case statements (in some languages)
  * Function Calls
  * Array and List Operations
  * String Operations
  * Object and Class Operations
  * Accessing properties (object.property)
- * Method calls (object.method())
  * Type Conversion
 
 

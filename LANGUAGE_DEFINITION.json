@@ -40,7 +40,10 @@
 
     ],
     "operators":[
-
+        "!",
+        "!=",
+        "*=",
+        "+="
     ],
     "operators_unary":[
 
