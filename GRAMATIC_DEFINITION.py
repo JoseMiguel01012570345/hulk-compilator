@@ -94,10 +94,23 @@ def traslator(token_list):
             
             if token_list[index] == arg:
                 
+                if arg == 'is':
+                
+                    parse_list.append("~")                    
+                    parse_list.append(token_list[index])
+                    kw =True
+                    break
+                
+                if arg == "==":
+                    parse_list.append(token_list[index])
+                    parse_list.append("#")                    
+                    kw =True
+                    break
+                
                 parse_list.append(token_list[index])
                 kw =True
                 break
-        
+            
         if not kw:
             if index + 1 < len(token_list) and token_list[index + 1 ] == "(" :
                 parse_list.append("Z ''")

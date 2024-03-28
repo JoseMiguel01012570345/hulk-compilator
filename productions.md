@@ -38,17 +38,15 @@ By default every non-token element is taken to `S '` if it is a word like inside
 
 By default every non-token element is taken to `L ''` if it is a word like
 
-* `D '` -> ( D ' )
 * `D '` -> let E0
-* `D ''` -> D ' , E0 $|$ D ' , D '
-* `D ''` -> D '' , E0 $|$ D '' , E0
-* `D` -> D '' ;
+* `D ''` -> E ' , E0 $|$ E ' , E '
+* `D ''` -> D '' , E0 $|$ D '' , E '
 * `E '` -> L '' := E ' $|$ L ''' := E ' $|$ D ' := E '
 * `E0` -> L '' = E ' $|$ L ''' = E '
 * `D` -> D '; 
 * `L '''` -> L '' : L '' // let x: Number = 42;
 * `L ''` -> (L '')
-* `E '` -> L ''
+* `L ''` ->  L '' as L ''
 
 ## Booleans
 
@@ -60,7 +58,7 @@ By default every non-token element is taken to `L ''` if it is a word like
 * `B '` ->  G ' > G ' $|$ G ' < G '
 * `B '` ->  G ' >= G ' $|$ G ' <= G '
 * `B '` -> E ' == E ' 
-* `B '` ->  E ' is E '
+* `B '` ->  E ' is L ''
 * `B '` -> ( B ' )
 * `B` -> B ' ; 
 
@@ -96,9 +94,9 @@ By default every non-token element is taken to `N '` if it is a number like.
 
 ## in
 
-* `E '` -> E ' in E ' $|$ D '' in E ' $|$ D ' in E '
-* `E` -> D '' in bl ' $|$ D ' in bl ' 
-* `E` -> E ' in bl $|$ D ' in E $|$ E ' in bl '
+* `E '` -> E ' in E ' $|$ D '' in E '
+* `E` -> D '' in bl '
+* `E` -> E ' in bl 
 * `E` ->  E ' in E $|$ D '' in E 
 
 ## for
@@ -202,7 +200,12 @@ By default every non-token element is taken to `N '` if it is a number like.
 
 ### Produccion segun operador
 
-G ' <= ([ P '' , N ' , L '' , X ' , T ' ] , [ '+' , '-' , '*' , '/' , '^' , '%'  , '++' , '--' , '/=' , ' *= ' , '-=' ] )
-G1 ' <= ([L '', N ' , P '' , S ' , T '], [ '@' , '@@' ])
-K <= ([L '' , P '' , X ' , T '],[ '&' , '|' , '()' ])
-E ' <= ([L '' , P '' , X ' , T '],( '.' , ','))
+- G ' <= ([ P '' , N ' , L '' , X ' , T ' ] , [ '+' , '-' , '*' , '/' , '^' , '%'  , '++' , '--' , '/=' , ' *= ' , '-=' , '>' , '<' , '>=' , '<=' , '!=' ] )
+
+- G1 ' <= ([L '', N ' , P '' , S ' , T '], [ '@' , '@@' ])
+
+- K <= ([L '' , P '' , X ' , T '],[ '&' , '|' , ')' ])
+
+- E ' <= ([S '~ , N '~ , P ''~ , B '~ , L ''~ , V '~ , D '~ , X '~ , T '~ , K~ , G '~ , G1 '~ , W '~] , [ '.' , ',' , ';' , 'else' , 'elif' , 'in' ,' , ':=', '$' , '||' , '==' , '~' , ']' ])
+
+- E ' <= ([ # S ' ,# N ' ,# P '' ,# B ' ,# L '' ,# V ' ,# D ' ,# X ' ,# T ' ,# K ,# G ' ,# G1 ' ,# W ' ] , [ '#' ])

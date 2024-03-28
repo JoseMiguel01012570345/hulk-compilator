@@ -9,11 +9,11 @@ class GrammarParser(IRegEx,IShiftReduceParser):
     """
     operator_procedence =[
         
-        ['(']
+        ['('],
         ['^','%'],
         ['*','/'],
         ['+','-'],
-        ['>','<','>=','<=','==','is'],
+        ['>','<','>=','<=','==', '~' ,'is'],
         ['['],
         ['&','|','!'],
         ['.'],
@@ -26,11 +26,12 @@ class GrammarParser(IRegEx,IShiftReduceParser):
         ['@','@@'],
         ['as'],
         ['let'],
-        [',']
-        ['type' , 'new' , 'function', 'in' , 'protocol' , "{"  ]
-        [":"]
-        [';',"}" , ']',')']
-        ['$']
+        [','],
+        ['type' , 'new' , 'function', 'in' , 'protocol' , "{"  ],
+        [":"],
+        [';',"}" , ']',')'],
+        ['||'],
+        ['$'],
     ]
     
     def __init__(self,grammar):
