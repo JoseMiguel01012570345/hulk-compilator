@@ -1,15 +1,14 @@
 
 `NOTES:`
 
-    P is an in-Line caLL , P '' is expression part caLL and P ' is an about to build function call , that derives in P or P '' , L ' is variable in brackets ( L '' ) where L '' is the variable , S ' is string , N ' is number , B ' is boolean , V ' is vector
-
+    P is an in-Line caLL , P '' is expression part caLL and P ' is an about to build function call , that derives in P or P '' , L ' is variable in brackets ( L '' ) where L '' is the variable , S ' is string , N ' is number , B ' is boolean , V ' is vector , Z '' is a L '' but before a function
 
 ## Function caLL:
  
-* `P '` -> L '' ( E ' , $|$ P ' E ' ,
-* `P '` -> L '' ( L ''' , $|$ P ' L ''' ,
-* `P '` -> L '' ( F  $|$ P ' F ,
-* `P '` -> L '' ( C  $|$ P ' C  ,
+* `P '` -> Z '' ( E ' , $|$ P ' E ' ,
+* `P '` -> Z '' ( L ''' , $|$ P ' L ''' ,
+* `P '` -> Z '' ( F  $|$ P ' F ,
+* `P '` -> Z '' ( C  $|$ P ' C  ,
 * `P ''` -> P ' )
 * `P ''` -> P '' 
 * `P ''` -> ( P '' )
@@ -19,8 +18,9 @@
 
 By default every non-token element is taken to `S '` if it is a word like inside quotation marks , `""`
 
-* `S '` -> E ' @ E ' 
-* `S '` -> E ' @@ E ' 
+* `G1 '` -> L '' $|$ L ' $|$ N ' $|$ P '' $|$ S '
+* `S '` -> G1 ' @ G1 ' 
+* `S '` -> G1 ' @@ G1 ' 
 * `S '` -> ( S ' )
 * `S` -> S ' ;
 
@@ -51,12 +51,12 @@ By default every non-token element is taken to `L ''` if it is a word like
 ## Booleans
 
 * `K` -> B ' $|$ L '' $|$ P '' $|$ L ' $|$ X '
-* `G` -> L '' $|$ L ' $|$ N ' $|$ P '' $|$ X '
+* `G '` -> L '' $|$ L ' $|$ N ' $|$ P '' $|$ X '
 * `B '` -> K & K
 * `B '` -> K || K
 * `B '` -> E ' != E ' 
-* `B '` ->  G > G $|$ G < G
-* `B '` ->  G >= G $|$ G <= G
+* `B '` ->  G ' > G ' $|$ G ' < G '
+* `B '` ->  G ' >= G ' $|$ G ' <= G '
 * `B '` -> E ' == E ' 
 * `B '` ->  E ' is E '
 * `B '` -> ( B ' )
@@ -79,9 +79,9 @@ By default every non-token element is taken to `N '` if it is a number like.
 * `G '` -> G ' ^  G '
 * `G '` -> G ' %  G '
 * `G '` -> ( G ' )
-
 ### No operator , but numbers
 
+* `N '` -> G '
 * `N '` -> L ' -= G '
 * `N '` -> L ' += G '
 * `N '` -> L ' /= G '

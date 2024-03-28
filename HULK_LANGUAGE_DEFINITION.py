@@ -348,7 +348,6 @@ SYMBOLS_and_OPERATORS=[
     'boolean',
     'string',
     'new',
-    'print',
     'function',
     'let',
     'in',
